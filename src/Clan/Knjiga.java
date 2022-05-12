@@ -1,5 +1,7 @@
 package Clan;
 
+import java.util.ArrayList;
+
 public abstract class Knjiga {
 	
 	protected int ID;
