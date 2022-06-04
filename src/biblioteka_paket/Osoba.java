@@ -1,6 +1,10 @@
-package Clan;
+package biblioteka_paket;
 
-public abstract class Clan {
+import biblioteka_paket.enums.Pol;
+
+import java.util.Objects;
+
+public abstract class Osoba {
 	
 	protected int ID;
 	protected Pol pol;
@@ -10,7 +14,7 @@ public abstract class Clan {
 	protected String adresa;
 	
 	
-	public Clan() {
+	public Osoba() {
 		this.ID = 0;
 		this.ime = "";
 		this.prezime = "";
@@ -18,7 +22,7 @@ public abstract class Clan {
 		this.adresa = "";
 	}
 	
-	public Clan(int ID, Pol pol ,
+	public Osoba(int ID, Pol pol,
 			String ime,
 			String prezime, String jmbg,
 			String adresa) {
@@ -79,7 +83,7 @@ public abstract class Clan {
 		this.adresa = adresa;
 	}
 
-	public Clan(Clan original) {
+	public Osoba(Osoba original) {
 		this.ID = original.ID;
 		this.pol = original.pol;
 		this.ime = original.ime;
@@ -92,5 +96,13 @@ public abstract class Clan {
 	public String toString() {
 		return "Osoba [ID=" + ID + ", pol=" + pol + ", ime=" + ime + ", prezime=" + prezime + ", JMBG=" + jmbg
 				+ ", adresa=" + adresa + "]";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Osoba osoba = (Osoba) o;
+		return ID == osoba.ID;
 	}
 }

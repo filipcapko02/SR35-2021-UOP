@@ -1,9 +1,10 @@
-package Clan;
+package biblioteka_paket;
 
 public class Clanarina {
-	protected int ID;
-	protected String naziv;
-	protected double cena;
+
+	private int ID;
+	private String naziv;
+	private double cena;
 	
 	
 	public Clanarina() {

@@ -1,13 +1,17 @@
-package Clan;
+package biblioteka_paket;
 
-public class Primerak {
+import biblioteka_paket.enums.Jezik;
+import biblioteka_paket.enums.Povez;
+
+public class PrimerakKnjige {
 	
-	protected int ID;
-	protected  String brojStrana;
-	protected Povez povez;
-	protected String godinaStampanja;
-	protected Jezik jezik;
-	protected Iznajmljena iznajmljena;
+	private int ID;
+	private Knjiga knjiga;
+	private String brojStrana;
+	private Povez povez;
+	private String godinaStampanja;
+	private Jezik jezik;
+	private boolean iznajmljena;
 	
 	public int getID() {
 		return ID;
@@ -49,24 +53,24 @@ public class Primerak {
 		this.jezik = jezik;
 	}
 
-	public Iznajmljena getIznajmljena() {
+	public boolean isIznajmljena() {
 		return iznajmljena;
 	}
 
-	public void setIznajmljena(Iznajmljena iznajmljena) {
+	public void setIznajmljena(boolean iznajmljena) {
 		this.iznajmljena = iznajmljena;
 	}
 
-	public Primerak() {
+	public PrimerakKnjige() {
 		this.ID = 0;
 		this.brojStrana = "";
 		this.godinaStampanja = "";
 	}
 	
-	public Primerak(int ID, String brojStrana ,
-			Povez povez,
-			String godinaStampanja, Jezik jezik,
-			Iznajmljena iznajmljena) {
+	public PrimerakKnjige(int ID, String brojStrana ,
+						  Povez povez,
+						  String godinaStampanja, Jezik jezik,
+						  boolean iznajmljena) {
 		super();
 		this.ID = ID;
 		this.brojStrana = brojStrana;
@@ -81,7 +85,7 @@ public class Primerak {
 				+ godinaStampanja + ", jezik=" + jezik + ", iznajmljena=" + iznajmljena + "]";
 	}
 
-	public Primerak(Primerak original) {
+	public PrimerakKnjige(PrimerakKnjige original) {
 		this.ID = original.ID;
 		this.brojStrana = original.brojStrana;
 		this.povez = original.povez;

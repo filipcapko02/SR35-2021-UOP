@@ -1,16 +1,20 @@
-package Clan;
+package biblioteka_paket;
 
-public class Zaposleni extends Clan {
+import java.util.Objects;
+
+public class Zaposleni extends Osoba {
 
 	protected String korisnickoIme;
 	protected String korisnickaSifra;
 	protected int plata;
+	private boolean obrisan;
 	
 	
 	public Zaposleni() {
 		this.korisnickoIme = "";
 		this.korisnickaSifra = "";
 		this.plata = 0;
+		this.obrisan = false;
 	}
 	
 	public Zaposleni(String korisnickoIme, String korisnickaSifra, int plata) {
@@ -19,8 +23,6 @@ public class Zaposleni extends Clan {
 		this.korisnickaSifra = korisnickaSifra;
 		this.plata = plata;
 	}
-	
-	
 
 	public String getKorisnickoIme() {
 		return korisnickoIme;
@@ -45,6 +47,8 @@ public class Zaposleni extends Clan {
 	public void setPlata(int plata) {
 		this.plata = plata;
 	}
-	
 
+	public boolean isObrisan() {
+		return obrisan;
+	}
 }
