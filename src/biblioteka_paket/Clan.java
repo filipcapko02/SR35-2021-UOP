@@ -9,7 +9,7 @@ public class Clan extends Osoba {
 	private TipClanarine tipClanarine;
 	private String datumPoslednjeUplate;
 	private int brojMeseci;
-	private boolean active;
+	private boolean aktivan;
 	
 	public Clan() {
 		this.ID = 0;
@@ -19,13 +19,13 @@ public class Clan extends Osoba {
 		this.adresa = "";
 	}
 
-	public Clan(int ID, Pol pol, String ime, String prezime, String jmbg, String adresa, int brojClanskeKarte, TipClanarine tipClanarine, String datumPoslednjeUplate, int brojMeseci, boolean active) {
+	public Clan(int ID, Pol pol, String ime, String prezime, String jmbg, String adresa, int brojClanskeKarte, TipClanarine tipClanarine, String datumPoslednjeUplate, int brojMeseci, boolean aktivan) {
 		super(ID, pol, ime, prezime, jmbg, adresa);
 		this.brojClanskeKarte = brojClanskeKarte;
 		this.tipClanarine = tipClanarine;
 		this.datumPoslednjeUplate = datumPoslednjeUplate;
 		this.brojMeseci = brojMeseci;
-		this.active = active;
+		this.aktivan = aktivan;
 	}
 	
 	public Clan(int ID, Pol pol ,
@@ -121,12 +121,12 @@ public class Clan extends Osoba {
 		this.brojMeseci = brojMeseci;
 	}
 
-	public boolean isActive() {
-		return active;
+	public boolean isAktivan() {
+		return aktivan;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setAktivan(boolean aktivan) {
+		this.aktivan = aktivan;
 	}
 
 	public Clan(Clan original) {
@@ -153,7 +153,7 @@ public class Clan extends Osoba {
 				", tipClanarine=" + tipClanarine +
 				", datumPoslednjeUplate='" + datumPoslednjeUplate + '\'' +
 				", brojMeseci=" + brojMeseci +
-				", active=" + active +
+				", aktivan=" + aktivan +
 				'}';
 	}
 }

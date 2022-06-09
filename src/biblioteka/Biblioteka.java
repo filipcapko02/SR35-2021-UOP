@@ -8,10 +8,7 @@ import biblioteka_paket.enums.Jezik;
 import biblioteka_paket.enums.Pol;
 import biblioteka_paket.enums.TipClanarine;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Biblioteka {
@@ -135,15 +132,57 @@ public class Biblioteka {
 	}
 
 	public void snimiZaposlene(String filename) {
-
+		File file = new File("src/fajlovi/" + filename);
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			String sadrzaj = "";
+			for (Zaposleni zaposleni: zaposleni) {
+				sadrzaj += zaposleni.getID() + "|" + zaposleni.getPol() + "|" + zaposleni.getIme() + "|"
+						+ zaposleni.getPrezime() + "|" + zaposleni.getJmbg() + "|" + zaposleni.getAdresa()
+						+ "|" + zaposleni.getPlata() + "\n";
+			}
+			writer.write(sadrzaj);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void snimiClanove(String filename) {
-
+		File file = new File("src/fajlovi/" + filename);
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			String sadrzaj = "";
+			for (Clan clan: clanovi) {
+				sadrzaj += clan.getID() + "|" + clan.getPol() + "|" + clan.getIme() + "|"
+						+ clan.getPrezime() + "|" + clan.getJmbg() + "|" + clan.getAdresa()
+						+ "|" + clan.getBrojClanskeKarte() + "|" + clan.getTipClanarine() + "|"
+						+ clan.getDatumPoslednjeUplate() + "|" + clan.getBrojMeseci()
+						+ "|" + clan.isAktivan() + "\n";
+			}
+			writer.write(sadrzaj);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void snimiKnjige(String filename) {
-
+		File file = new File("src/fajlovi/" + filename);
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			String sadrzaj = "";
+			for (Knjiga knjiga: knjige) {
+				sadrzaj += knjiga.getID() + "|" + knjiga.getNaslovKnjige() + "|" + knjiga.getImePisca() + "|"
+						+ knjiga.getPrezimePisca() + "|" + knjiga.getGodinaObjave() + "|" + knjiga.getJezik()
+						+ "|" + knjiga.getOpis() + "|" + knjiga.getZanr() + "|"
+						+ knjiga.getZanr().getOpis() + "\n";
+			}
+			writer.write(sadrzaj);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 

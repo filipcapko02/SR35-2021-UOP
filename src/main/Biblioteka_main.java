@@ -9,6 +9,8 @@ import biblioteka_paket.enums.Jezik;
 import biblioteka_paket.enums.Pol;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Biblioteka_main {
 
