@@ -1,6 +1,6 @@
 package biblioteka_paket;
 
-import java.util.Objects;
+import biblioteka_paket.enums.Pol;
 
 public class Zaposleni extends Osoba {
 
@@ -22,6 +22,30 @@ public class Zaposleni extends Osoba {
 		this.korisnickoIme = korisnickoIme;
 		this.korisnickaSifra = korisnickaSifra;
 		this.plata = plata;
+	}
+
+	public Zaposleni(int ID, Pol pol, String ime, String prezime, String jmbg, String adresa, String korisnickoIme, String korisnickaSifra, int plata, boolean obrisan) {
+		super(ID, pol, ime, prezime, jmbg, adresa);
+		this.korisnickoIme = korisnickoIme;
+		this.korisnickaSifra = korisnickaSifra;
+		this.plata = plata;
+		this.obrisan = obrisan;
+	}
+
+	@Override
+	public String toString() {
+		return "Zaposleni{" +
+				"ID=" + ID +
+				", pol=" + pol +
+				", ime='" + ime + '\'' +
+				", prezime='" + prezime + '\'' +
+				", jmbg='" + jmbg + '\'' +
+				", adresa='" + adresa + '\'' +
+				", korisnickoIme='" + korisnickoIme + '\'' +
+				", korisnickaSifra='" + korisnickaSifra + '\'' +
+				", plata=" + plata +
+				", obrisan=" + obrisan +
+				'}';
 	}
 
 	public String getKorisnickoIme() {

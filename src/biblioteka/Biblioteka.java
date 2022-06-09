@@ -2,8 +2,16 @@ package biblioteka;
 
 import biblioteka_paket.Clan;
 import biblioteka_paket.Knjiga;
+import biblioteka_paket.Zanr;
 import biblioteka_paket.Zaposleni;
+import biblioteka_paket.enums.Jezik;
+import biblioteka_paket.enums.Pol;
+import biblioteka_paket.enums.TipClanarine;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Biblioteka {
@@ -15,27 +23,115 @@ public class Biblioteka {
 	private ArrayList<Zaposleni> zaposleni;
 	private ArrayList<Knjiga> knjige;
 	private ArrayList<Clan> clanovi;
+	private ArrayList<Zanr> zanrovi;
 
 	public Biblioteka() {
 		this.clanovi = new ArrayList<Clan>();
 		this.knjige = new ArrayList<Knjiga>();
 		this.zaposleni = new ArrayList<Zaposleni>();
+		this.zanrovi = new ArrayList<Zanr>();
 	}
-
-
-
 
 
 	public void ucitajZaposlene(String filename) {
+		try {
+			File file = new File("src/fajlovi/" + filename);
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				String[] split = line.split("\\|");
+				int id = Integer.parseInt(split[0]);
+				Pol pol;
+				if (split[1].equals("Musko")) {
+					pol = Pol.MUSKO;
+				} else {
+					pol = Pol.ZENSKO;
+				}
+				String ime = split[2];
+				String prezime = split[3];
+				String jmbg = split[4];
+				String adresa = split[5];
+				String korisnickoIme = split[6];
+				String korisnickaSifra = "123";
+				int plata = Integer.parseInt(split[7]);
+				Zaposleni zaposleni = new Zaposleni(id, pol, ime, prezime, jmbg, adresa, korisnickoIme, korisnickaSifra, plata, false);
+				this.zaposleni.add(zaposleni);
+			}
 
+			reader.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void ucitajClanove(String filename) {
+		try {
+			File file = new File("src/fajlovi/" + filename);
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				String[] split = line.split("\\|");
+				int id = Integer.parseInt(split[0]);
+				Pol pol;
+				if (split[1].equals("Musko")) {
+					pol = Pol.MUSKO;
+				} else {
+					pol = Pol.ZENSKO;
+				}
+				String ime = split[2];
+				String prezime = split[3];
+				String jmbg = split[4];
+				String adresa = split[5];
+				int brojClanskeKarte = Integer.parseInt(split[6]);
+				TipClanarine tipClanarine = null;
+				if (split[7].equals("ostali")) {
+					tipClanarine = TipClanarine.OSTALI;
+				}
+				String datumUplate = split[8];
+				int brojMeseci = Integer.parseInt(split[9]);
+				boolean active = split[10].equals("Aktivan");
 
+				Clan clan = new Clan(id, pol, ime, prezime, jmbg, adresa, brojClanskeKarte ,tipClanarine, datumUplate, brojMeseci, active);
+				this.clanovi.add(clan);
+			}
+
+			reader.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void ucitajKnjige(String filename) {
+		try {
+			File file = new File("src/fajlovi/" + filename);
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				String[] split = line.split("\\|");
+				int id = Integer.parseInt(split[0]);
+				String naslov = split[1];
+				String imePisca = split[2];
+				String prezimePisca = split[3];
+				String datumObjave = split[4];
+				Jezik jezik = Jezik.valueOf(split[5]);
+				String opis = split[6];
+				Zanr zanr = nadjiZanr(split[7]);
+				if (zanr == null) {
+					zanr = new Zanr(split[7], split[8]);
+					this.zanrovi.add(zanr);
+				}
 
+				Knjiga knjiga = new Knjiga(id, naslov, imePisca, imePisca, prezimePisca, datumObjave, jezik, opis, zanr);
+				this.knjige.add(knjiga);
+			}
+
+			reader.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void snimiZaposlene(String filename) {
@@ -48,6 +144,16 @@ public class Biblioteka {
 
 	public void snimiKnjige(String filename) {
 
+	}
+
+
+	public Zanr nadjiZanr(String oznaka) {
+		for (Zanr zanr: zanrovi) {
+			if (zanr.getOznaka().equals(oznaka)) {
+				return zanr;
+			}
+		}
+		return null;
 	}
 
 
@@ -179,5 +285,13 @@ public class Biblioteka {
 
 	public void setClanovi(ArrayList<Clan> clanovi) {
 		this.clanovi = clanovi;
+	}
+
+	public ArrayList<Zanr> getZanrovi() {
+		return zanrovi;
+	}
+
+	public void setZanrovi(ArrayList<Zanr> zanrovi) {
+		this.zanrovi = zanrovi;
 	}
 }

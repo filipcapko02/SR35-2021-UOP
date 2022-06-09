@@ -18,6 +18,15 @@ public class Clan extends Osoba {
 		this.jmbg = "";
 		this.adresa = "";
 	}
+
+	public Clan(int ID, Pol pol, String ime, String prezime, String jmbg, String adresa, int brojClanskeKarte, TipClanarine tipClanarine, String datumPoslednjeUplate, int brojMeseci, boolean active) {
+		super(ID, pol, ime, prezime, jmbg, adresa);
+		this.brojClanskeKarte = brojClanskeKarte;
+		this.tipClanarine = tipClanarine;
+		this.datumPoslednjeUplate = datumPoslednjeUplate;
+		this.brojMeseci = brojMeseci;
+		this.active = active;
+	}
 	
 	public Clan(int ID, Pol pol ,
 			String ime,
@@ -129,9 +138,22 @@ public class Clan extends Osoba {
 		this.adresa = original.adresa;
 		
 	}
+
+
 	@Override
 	public String toString() {
-		return "Osoba [ID=" + ID + ", pol=" + pol + ", ime=" + ime + ", prezime=" + prezime + ", JMBG=" + jmbg
-				+ ", adresa=" + adresa + "]";
+		return "Clan{" +
+				", ID=" + ID +
+				", pol=" + pol +
+				", ime='" + ime + '\'' +
+				", prezime='" + prezime + '\'' +
+				", jmbg='" + jmbg + '\'' +
+				", adresa='" + adresa + '\'' +
+				"brojClanskeKarte=" + brojClanskeKarte +
+				", tipClanarine=" + tipClanarine +
+				", datumPoslednjeUplate='" + datumPoslednjeUplate + '\'' +
+				", brojMeseci=" + brojMeseci +
+				", active=" + active +
+				'}';
 	}
 }

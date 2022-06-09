@@ -1,4 +1,4 @@
-3219|Petar Pan|Laza|Kostic|1992|Srpski|opis|zanr
-3219|Petar Pan|Laza|Kostic|1992|Srpski|opis|zanr
-3219|Petar Pan|Laza|Kostic|1992|Srpski|opis|zanr
-3219|Petar Pan|Laza|Kostic|1992|Srpski|opis|zanr
+3219|Petar Pan|Laza|Kostic|1992|SRPSKI|opis|zanr|opisZanra
+3211|Petar Pan|Laza|Kostic|1992|SRPSKI|opis|zanr|opisZanra
+3212|Petar Pan|Laza|Kostic|1992|SRPSKI|opis|zanr|opisZanra
+3213|Petar Pan|Laza|Kostic|1992|SRPSKI|opis|zanr|opisZanra
