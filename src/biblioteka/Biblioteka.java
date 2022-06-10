@@ -1,9 +1,6 @@
 package biblioteka;
 
-import biblioteka_paket.Clan;
-import biblioteka_paket.Knjiga;
-import biblioteka_paket.Zanr;
-import biblioteka_paket.Zaposleni;
+import biblioteka_paket.*;
 import biblioteka_paket.enums.Jezik;
 import biblioteka_paket.enums.Pol;
 import biblioteka_paket.enums.TipClanarine;
@@ -49,9 +46,15 @@ public class Biblioteka {
 				String jmbg = split[4];
 				String adresa = split[5];
 				String korisnickoIme = split[6];
-				String korisnickaSifra = "123";
-				int plata = Integer.parseInt(split[7]);
-				Zaposleni zaposleni = new Zaposleni(id, pol, ime, prezime, jmbg, adresa, korisnickoIme, korisnickaSifra, plata, false);
+				String korisnickaSifra = split[7];
+				int plata = Integer.parseInt(split[8]);
+				String uloga = split[9];
+				Zaposleni zaposleni;
+				if (uloga.equals("Administrator")) {
+					zaposleni = new Administrator(id, pol, ime, prezime, jmbg, adresa, korisnickoIme, korisnickaSifra, plata, false);
+				} else {
+					zaposleni = new Bibliotekar(id, pol, ime, prezime, jmbg, adresa, korisnickoIme, korisnickaSifra, plata, false);
+				}
 				this.zaposleni.add(zaposleni);
 			}
 
@@ -71,7 +74,7 @@ public class Biblioteka {
 				String[] split = line.split("\\|");
 				int id = Integer.parseInt(split[0]);
 				Pol pol;
-				if (split[1].equals("Musko")) {
+				if (split[1].equals("MUSKO")) {
 					pol = Pol.MUSKO;
 				} else {
 					pol = Pol.ZENSKO;
@@ -82,12 +85,12 @@ public class Biblioteka {
 				String adresa = split[5];
 				int brojClanskeKarte = Integer.parseInt(split[6]);
 				TipClanarine tipClanarine = null;
-				if (split[7].equals("ostali")) {
+				if (split[7].equals("OSTALI")) {
 					tipClanarine = TipClanarine.OSTALI;
 				}
 				String datumUplate = split[8];
 				int brojMeseci = Integer.parseInt(split[9]);
-				boolean active = split[10].equals("Aktivan");
+				boolean active = split[10].equals("active");
 
 				Clan clan = new Clan(id, pol, ime, prezime, jmbg, adresa, brojClanskeKarte ,tipClanarine, datumUplate, brojMeseci, active);
 				this.clanovi.add(clan);
@@ -139,7 +142,8 @@ public class Biblioteka {
 			for (Zaposleni zaposleni: zaposleni) {
 				sadrzaj += zaposleni.getID() + "|" + zaposleni.getPol() + "|" + zaposleni.getIme() + "|"
 						+ zaposleni.getPrezime() + "|" + zaposleni.getJmbg() + "|" + zaposleni.getAdresa()
-						+ "|" + zaposleni.getPlata() + "\n";
+						+ "|" + zaposleni.getKorisnickoIme() + "|" + zaposleni.getKorisnickaSifra() + "|"
+						+ zaposleni.getPlata() + "|" + zaposleni.getClass().getSimpleName() + "\n";
 			}
 			writer.write(sadrzaj);
 			writer.close();
@@ -175,7 +179,7 @@ public class Biblioteka {
 			for (Knjiga knjiga: knjige) {
 				sadrzaj += knjiga.getID() + "|" + knjiga.getNaslovKnjige() + "|" + knjiga.getImePisca() + "|"
 						+ knjiga.getPrezimePisca() + "|" + knjiga.getGodinaObjave() + "|" + knjiga.getJezik()
-						+ "|" + knjiga.getOpis() + "|" + knjiga.getZanr() + "|"
+						+ "|" + knjiga.getOpis() + "|" + knjiga.getZanr().getOznaka() + "|"
 						+ knjiga.getZanr().getOpis() + "\n";
 			}
 			writer.write(sadrzaj);

@@ -1,4 +1,4 @@
-8574|Musko|Filip|Capko|243149812|Sarajevska|34|ostali|03.05.2021.|6|Aktivan
-8324|Musko|Goran|Djruovic|846816569|Patrijarha Pavla|35|ostali|06.05.2021.|6|Aktivan
-1574|Musko|Va|Laskez|3294321231|JNA|36|ostali|09.05.2021.|6|Aktivan
-8531|Musko|Lule|Jajara|95656682165|Dunavska|37|ostali|01.05.2021.|6|Aktivan
+8574|MUSKO|Filip|Capko|243149812|Sarajevska|34|OSTALI|03.05.2021.|6|false
+8324|MUSKO|Goran|Djruovic|846816569|Patrijarha Pavla|35|OSTALI|06.05.2021.|6|false
+1574|MUSKO|Va|Laskez|3294321231|JNA|36|OSTALI|09.05.2021.|6|false
+8531|MUSKO|Lule|Jajara|95656682165|Dunavska|37|OSTALI|01.05.2021.|6|false

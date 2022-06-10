@@ -7,6 +7,7 @@ import biblioteka_paket.Zanr;
 import biblioteka_paket.Zaposleni;
 import biblioteka_paket.enums.Jezik;
 import biblioteka_paket.enums.Pol;
+import gui.LoginProzor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +44,12 @@ public class Biblioteka_main {
 		biblioteka.snimiKnjige(KNJIGE_FAJL);
 		biblioteka.snimiZaposlene(ZAPOSLENI_FAJL);
 		biblioteka.snimiClanove(CLANOVI_FAJL);
+
+
+		LoginProzor lp = new LoginProzor(biblioteka);
+		lp.setVisible(true);
+
+
 	}
 	
 	public static void ispisiSvePodatke(Biblioteka biblioteka) {
