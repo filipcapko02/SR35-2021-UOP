@@ -12,11 +12,13 @@ import java.awt.event.ActionListener;
 
 public class DodajIznajmljivanjeProzor extends JFrame {
 
+    private JLabel lblId = new JLabel("ID");
     private JLabel lblZaposleni = new JLabel("Zaposleni");
     private JLabel lblClan = new JLabel("Clan");
     private JLabel lblDatumIznajmljivanja = new JLabel("Datum iznajmljivanja");
     private JLabel lblDatumVracanja = new JLabel("Datum vracanja");
     private JLabel lblPrimerakKnjige = new JLabel("Primerak");
+    private JTextField txtId;
     private JTextField txtDatumIznajmljivanja;
     private JTextField txtDatumVracanja;
     private JComboBox<Zaposleni> cbZaposleni;
@@ -38,6 +40,7 @@ public class DodajIznajmljivanjeProzor extends JFrame {
     }
 
     private void initGUI() {
+        txtId = new JTextField("", 20);
         txtDatumIznajmljivanja = new JTextField("", 20);
         txtDatumVracanja = new JTextField("", 20);
         Zaposleni[] zaposleni = new Zaposleni[iznajmljivanjaProzor.getBiblioteka().getZaposleni().size()];
@@ -79,7 +82,12 @@ public class DodajIznajmljivanjeProzor extends JFrame {
         btnDodaj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtId.getText().equals("") || txtDatumIznajmljivanja.getText().equals("") || txtDatumVracanja.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 Iznajmljivanje iznajmljivanje = new Iznajmljivanje();
+                iznajmljivanje.setID(Integer.parseInt(txtId.getText()));
                 iznajmljivanje.setZaposleni((Zaposleni) cbZaposleni.getSelectedItem());
                 iznajmljivanje.setClan((Clan) cbClanovi.getSelectedItem());
                 iznajmljivanje.setDatumIznajmljivanja(txtDatumIznajmljivanja.getText());

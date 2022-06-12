@@ -1,11 +1,7 @@
 package gui.primerci;
 
 import biblioteka.Biblioteka;
-import biblioteka_paket.Knjiga;
 import biblioteka_paket.PrimerakKnjige;
-import gui.knjige.DodajKnjiguProzor;
-import gui.knjige.IzmenaKnjigeProzor;
-import gui.knjige.KnjigeProzor;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

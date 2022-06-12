@@ -92,6 +92,10 @@ public class DodajPrimerakProzor extends JFrame {
         btnDodaj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtId.getText().equals("") || txtBrojStrana.getText().equals("") || txtGodinaStampanja.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 PrimerakKnjige primerakKnjige = new PrimerakKnjige();
                 primerakKnjige.setID(Integer.parseInt(txtId.getText()));
                 primerakKnjige.setKnjiga((Knjiga) cbKnjige.getSelectedItem());

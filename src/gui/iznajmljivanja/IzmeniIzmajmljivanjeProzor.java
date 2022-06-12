@@ -78,6 +78,10 @@ public class IzmeniIzmajmljivanjeProzor extends JFrame {
         btnPromeni.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtDatumIznajmljivanja.getText().equals("") || txtDatumVracanja.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 iznajmljivanje.setZaposleni((Zaposleni) cbZaposleni.getSelectedItem());
                 iznajmljivanje.setClan((Clan) cbClanovi.getSelectedItem());
                 iznajmljivanje.setDatumIznajmljivanja(txtDatumIznajmljivanja.getText());

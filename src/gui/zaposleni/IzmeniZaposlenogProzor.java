@@ -79,6 +79,12 @@ public class IzmeniZaposlenogProzor extends JFrame {
         btnPromeni.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtIme.getText().equals("") || txtPrezime.getText().equals("") || txtAdresa.getText().equals("")
+                        || txtKorisnickoIme.getText().equals("") || txtKorisnickaSifra.getText().equals("") || txtPlata.getText().equals("")
+                        || txtJmbg.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 zaposleni.setIme(txtIme.getText());
                 zaposleni.setPrezime(txtPrezime.getText());
                 zaposleni.setJmbg(txtJmbg.getText());

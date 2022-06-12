@@ -1,6 +1,7 @@
 package gui.clanovi;
 
 import biblioteka_paket.Clan;
+import biblioteka_paket.Clanarina;
 import biblioteka_paket.enums.Pol;
 import net.miginfocom.swing.MigLayout;
 
@@ -27,7 +28,7 @@ public class DodajClanaProzor extends JFrame {
     private JTextField txtJmbg;
     private JTextField txtAdresa;
     private JTextField txtBrojClanskeKarte;
-    private JTextField txtTipClanarine;
+    private JComboBox<Clanarina> cbClanarine;
     private JTextField txtDatumPoslednjeUplate;
     private JTextField txtBrojMeseci;
     private JButton btnDodaj = new JButton("Dodaj");
@@ -53,7 +54,11 @@ public class DodajClanaProzor extends JFrame {
         txtAdresa = new JTextField("", 20);
         txtJmbg = new JTextField("", 20);
         txtBrojClanskeKarte = new JTextField("", 20);
-        txtTipClanarine = new JTextField("", 20);
+        Clanarina[] clanarine = new Clanarina[clanoviProzor.getBiblioteka().getClanarine().size()];
+        for (int i = 0; i < clanoviProzor.getBiblioteka().getClanarine().size(); i++) {
+            clanarine[i] = clanoviProzor.getBiblioteka().getClanarine().get(i);
+        }
+        cbClanarine = new JComboBox<>(clanarine);
         txtDatumPoslednjeUplate = new JTextField("", 20);
         txtBrojMeseci = new JTextField("", 20);
 
@@ -76,7 +81,7 @@ public class DodajClanaProzor extends JFrame {
         add(lblBrojClanskeKarte);
         add(txtBrojClanskeKarte);
         add(lblTipClanarine);
-        add(txtTipClanarine);
+        add(cbClanarine);
         add(lblDatumPoslednjeUplate);
         add(txtDatumPoslednjeUplate);
         add(lblBrojMeseci);
@@ -91,8 +96,14 @@ public class DodajClanaProzor extends JFrame {
         btnDodaj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtId.getText().equals("") || txtIme.getText().equals("") || txtPrezime.getText().equals("") || txtAdresa.getText().equals("")
+                        || txtBrojClanskeKarte.getText().equals("") || txtBrojMeseci.getText().equals("") || txtDatumPoslednjeUplate.getText().equals("")
+                        || txtJmbg.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 Clan clan = new Clan(Integer.parseInt(txtId.getText()), Pol.valueOf(txtPol.getText()), txtIme.getText(), txtPrezime.getText(),
-                        txtJmbg.getText(), txtAdresa.getText(), Integer.parseInt(txtBrojClanskeKarte.getText()), clanoviProzor.getBiblioteka().nadjiClanarinu(txtTipClanarine.getText()),
+                        txtJmbg.getText(), txtAdresa.getText(), Integer.parseInt(txtBrojClanskeKarte.getText()), (Clanarina) cbClanarine.getSelectedItem(),
                         txtDatumPoslednjeUplate.getText(), Integer.parseInt(txtBrojMeseci.getText()), true);
                 clanoviProzor.getBiblioteka().dodajClana(clan);
                 clanoviProzor.updateTable();

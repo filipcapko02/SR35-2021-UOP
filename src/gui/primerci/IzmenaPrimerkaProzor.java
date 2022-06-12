@@ -91,6 +91,10 @@ public class IzmenaPrimerkaProzor extends JFrame {
         btnPromeni.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtBrojStrana.getText().equals("") || txtGodinaStampanja.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 primerakKnjige.setKnjiga((Knjiga) cbKnjige.getSelectedItem());
                 primerakKnjige.setBrojStrana(Integer.parseInt(txtBrojStrana.getText()));
                 primerakKnjige.setGodinaStampanja(txtGodinaStampanja.getText());

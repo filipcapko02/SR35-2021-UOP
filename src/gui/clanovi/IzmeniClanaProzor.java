@@ -1,6 +1,7 @@
 package gui.clanovi;
 
 import biblioteka_paket.Clan;
+import biblioteka_paket.Clanarina;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -21,8 +22,8 @@ public class IzmeniClanaProzor extends JFrame {
     private JTextField txtPrezime;
     private JTextField txtJmbg;
     private JTextField txtAdresa;
+    private JComboBox<Clanarina> cbClanarine;
     private JTextField txtBrojClanskeKarte;
-    private JTextField txtTipClanarine;
     private JTextField txtDatumPoslednjeUplate;
     private JTextField txtBrojMeseci;
     private JButton btnPromeni = new JButton("Promeni");
@@ -49,7 +50,11 @@ public class IzmeniClanaProzor extends JFrame {
         txtAdresa = new JTextField(clan.getAdresa(), 20);
         txtJmbg = new JTextField(clan.getJmbg(), 20);
         txtBrojClanskeKarte = new JTextField(String.valueOf(clan.getBrojClanskeKarte()), 20);
-        txtTipClanarine = new JTextField(clan.getClanarina().getNaziv(), 20);
+        Clanarina[] clanarine = new Clanarina[clanoviProzor.getBiblioteka().getClanarine().size()];
+        for (int i = 0; i < clanoviProzor.getBiblioteka().getClanarine().size(); i++) {
+            clanarine[i] = clanoviProzor.getBiblioteka().getClanarine().get(i);
+        }
+        cbClanarine = new JComboBox<>(clanarine);
         txtDatumPoslednjeUplate = new JTextField(clan.getDatumPoslednjeUplate(), 20);
         txtBrojMeseci = new JTextField(String.valueOf(clan.getBrojMeseci()), 20);
 
@@ -68,7 +73,7 @@ public class IzmeniClanaProzor extends JFrame {
         add(lblBrojClanskeKarte);
         add(txtBrojClanskeKarte);
         add(lblTipClanarine);
-        add(txtTipClanarine);
+        add(cbClanarine);
         add(lblDatumPoslednjeUplate);
         add(txtDatumPoslednjeUplate);
         add(lblBrojMeseci);
@@ -83,6 +88,12 @@ public class IzmeniClanaProzor extends JFrame {
         btnPromeni.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtIme.getText().equals("") || txtPrezime.getText().equals("") || txtAdresa.getText().equals("")
+                        || txtBrojClanskeKarte.getText().equals("") || txtBrojMeseci.getText().equals("") || txtDatumPoslednjeUplate.getText().equals("")
+                        || txtJmbg.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 clan.setIme(txtIme.getText());
                 clan.setPrezime(txtPrezime.getText());
                 clan.setAdresa(txtAdresa.getText());
@@ -90,7 +101,7 @@ public class IzmeniClanaProzor extends JFrame {
                 clan.setBrojMeseci(Integer.parseInt(txtBrojMeseci.getText()));
                 clan.setDatumPoslednjeUplate(txtDatumPoslednjeUplate.getText());
                 clan.setJmbg(txtJmbg.getText());
-                clan.setClanarina(clanoviProzor.getBiblioteka().nadjiClanarinu(txtTipClanarine.getText()));
+                clan.setClanarina((Clanarina) cbClanarine.getSelectedItem());
                 clanoviProzor.updateTable();
                 IzmeniClanaProzor.this.dispose();
                 IzmeniClanaProzor.this.setVisible(false);

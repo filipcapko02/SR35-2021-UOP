@@ -95,6 +95,12 @@ public class DodajZaposlenogProzor extends JFrame {
         btnDodaj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtId.getText().equals("") || txtIme.getText().equals("") || txtPrezime.getText().equals("") || txtAdresa.getText().equals("")
+                        || txtKorisnickoIme.getText().equals("") || txtKorisnickaSifra.getText().equals("") || txtPlata.getText().equals("")
+                        || txtJmbg.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 Zaposleni zaposleni;
                 if (zaposleniProzor.getUloga().equals("administratori")) {
                     zaposleni = new Administrator();

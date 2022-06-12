@@ -10,6 +10,7 @@ import gui.knjige.KnjigeProzor;
 import gui.primerci.PrimerciProzor;
 import gui.zanrovi.ZanroviProzor;
 import gui.zaposleni.ZaposleniProzor;
+import main.Biblioteka_main;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ public class GlavniProzor extends JFrame {
     private JMenuItem zanroviItem = new JMenuItem("Zanrovi");
     private JMenuItem primerciItem = new JMenuItem("Primerci knjiga");
     private JMenuItem iznajmiljivanjaItem = new JMenuItem("Iznajmljivanja");
+    private JMenuItem snimiItem = new JMenuItem("Snimi");
     private JMenuItem tipoviClanarineItem = new JMenuItem("Tipovi clanarine");
 
     private Biblioteka biblioteka;
@@ -60,6 +62,7 @@ public class GlavniProzor extends JFrame {
         knjigeMenu.add(primerciItem);
         knjigeMenu.add(iznajmiljivanjaItem);
         bibliotekaMenu.add(tipoviClanarineItem);
+        bibliotekaMenu.add(snimiItem);
     }
 
     private void initActions() {
@@ -124,6 +127,20 @@ public class GlavniProzor extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 IznajmljivanjaProzor ip = new IznajmljivanjaProzor(biblioteka);
                 ip.setVisible(true);
+            }
+        });
+
+        snimiItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                biblioteka.snimiKnjige(Biblioteka_main.KNJIGE_FAJL);
+                biblioteka.snimiZanrove(Biblioteka_main.ZANROVI_FAJL);
+                biblioteka.snimiClanarine(Biblioteka_main.CLANARINE_FAJL);
+                biblioteka.snimiIznajmljivanja(Biblioteka_main.IZNAJMLJIVANJA_FAJL);
+                biblioteka.snimiPrimerke(Biblioteka_main.PRIMERCI_FAJL);
+                biblioteka.snimiClanove(Biblioteka_main.CLANOVI_FAJL);
+                biblioteka.snimiZaposlene(Biblioteka_main.ZAPOSLENI_FAJL);
+                JOptionPane.showMessageDialog(null, "Snimanje uspesno.", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 

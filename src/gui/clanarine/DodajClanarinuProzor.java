@@ -60,6 +60,10 @@ public class DodajClanarinuProzor extends JFrame {
         btnDodaj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtId.getText().equals("") || txtNaziv.getText().equals("") || txtCena.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 Clanarina clanarina = new Clanarina();
                 clanarina.setID(Integer.parseInt(txtId.getText()));
                 clanarina.setNaziv(txtNaziv.getText());

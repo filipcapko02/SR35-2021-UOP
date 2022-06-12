@@ -55,6 +55,10 @@ public class IzmeniZanrProzor extends JFrame {
         btnPromeni.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtOznaka.getText().equals("") || txtOpis.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 zanr.setOznaka(txtOznaka.getText());
                 zanr.setOpis(txtOpis.getText());
                 zanroviProzor.updateTable();

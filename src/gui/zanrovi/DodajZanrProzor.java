@@ -55,6 +55,10 @@ public class DodajZanrProzor extends JFrame {
         btnDodaj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtId.getText().equals("") || txtOznaka.getText().equals("") || txtOpis.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 Zanr zanr = new Zanr();
                 zanr.setID(Integer.parseInt(txtId.getText()));
                 zanr.setOznaka(txtOznaka.getText());

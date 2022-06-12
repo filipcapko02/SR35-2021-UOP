@@ -1,3 +1,4 @@
 1|Komedija|opis
 2|Horor|opis
 3|Avantura|opis
+4|Krimi|opis

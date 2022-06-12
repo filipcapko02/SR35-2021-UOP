@@ -1,5 +1,6 @@
 package gui.knjige;
 
+import biblioteka_paket.Clanarina;
 import biblioteka_paket.Knjiga;
 import biblioteka_paket.Zanr;
 import biblioteka_paket.enums.Jezik;
@@ -8,6 +9,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class DodajKnjiguProzor extends JFrame {
 
@@ -26,7 +28,7 @@ public class DodajKnjiguProzor extends JFrame {
     private JTextField txtGodina;
     private JTextField txtJezik;
     private JTextField txtOpis;
-    private JTextField txtZanr;
+    private JComboBox<Zanr> cbZanrovi;
     private JButton btnDodaj = new JButton("Dodaj");
     private JButton btnCancel = new JButton("Cancel");
 
@@ -51,8 +53,11 @@ public class DodajKnjiguProzor extends JFrame {
         txtGodina = new JTextField("", 20);
         txtJezik = new JTextField("", 20);
         txtOpis = new JTextField("", 20);
-        txtZanr = new JTextField("", 20);
-
+        Zanr[] zanrovi = new Zanr[knjigeProzor.getBiblioteka().getZanrovi().size()];
+        for (int i = 0; i < knjigeProzor.getBiblioteka().getZanrovi().size(); i++) {
+            zanrovi[i] = knjigeProzor.getBiblioteka().getZanrovi().get(i);
+        }
+        cbZanrovi = new JComboBox<>(zanrovi);
 
         MigLayout mig = new MigLayout("wrap 2", "[]5[]", "[]10[][]10[]10[]10[]10[]");
         setLayout(mig);
@@ -72,7 +77,7 @@ public class DodajKnjiguProzor extends JFrame {
         add(lblJezik);
         add(txtJezik);
         add(lblZanr);
-        add(txtZanr);
+        add(cbZanrovi);
         add(btnDodaj);
         add(btnCancel);
 
@@ -83,6 +88,11 @@ public class DodajKnjiguProzor extends JFrame {
         btnDodaj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtId.getText().equals("") || txtIme.getText().equals("") || txtPrezime.getText().equals("") || txtNaslov.getText().equals("")
+                        || txtGodina.getText().equals("") || txtOpis.getText().equals("") || txtJezik.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 Knjiga knjiga = new Knjiga();
                 knjiga.setID(Integer.parseInt(txtId.getText()));
                 knjiga.setNaslovKnjige(txtNaslov.getText());
@@ -91,7 +101,7 @@ public class DodajKnjiguProzor extends JFrame {
                 knjiga.setGodinaObjave(txtGodina.getText());
                 knjiga.setOpis(txtOpis.getText());
                 knjiga.setJezik(Jezik.valueOf(txtJezik.getText()));
-                knjiga.setZanr(knjigeProzor.getBiblioteka().nadjiZanr(txtZanr.getText()));
+                knjiga.setZanr((Zanr) cbZanrovi.getSelectedItem());
                 knjigeProzor.getBiblioteka().dodajKnjigu(knjiga);
                 knjigeProzor.updateTable();
                 DodajKnjiguProzor.this.dispose();

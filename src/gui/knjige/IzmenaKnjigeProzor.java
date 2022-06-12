@@ -1,6 +1,7 @@
 package gui.knjige;
 
 import biblioteka_paket.Knjiga;
+import biblioteka_paket.Zanr;
 import biblioteka_paket.enums.Jezik;
 import net.miginfocom.swing.MigLayout;
 
@@ -23,7 +24,7 @@ public class IzmenaKnjigeProzor extends JFrame {
     private JTextField txtGodina;
     private JTextField txtJezik;
     private JTextField txtOpis;
-    private JTextField txtZanr;
+    private JComboBox<Zanr> cbZanrovi;
     private JButton btnPromeni = new JButton("Promeni");
     private JButton btnCancel = new JButton("Cancel");
 
@@ -49,7 +50,11 @@ public class IzmenaKnjigeProzor extends JFrame {
         txtGodina = new JTextField(knjiga.getGodinaObjave(), 20);
         txtJezik = new JTextField(knjiga.getJezik().toString(), 20);
         txtOpis = new JTextField(knjiga.getOpis(), 20);
-        txtZanr = new JTextField(knjiga.getZanr().getOznaka(), 20);
+        Zanr[] zanrovi = new Zanr[knjigeProzor.getBiblioteka().getZanrovi().size()];
+        for (int i = 0; i < knjigeProzor.getBiblioteka().getZanrovi().size(); i++) {
+            zanrovi[i] = knjigeProzor.getBiblioteka().getZanrovi().get(i);
+        }
+        cbZanrovi = new JComboBox<>(zanrovi);
 
 
         MigLayout mig = new MigLayout("wrap 2", "[]5[]", "[]10[][]10[]10[]10[]10[]");
@@ -66,7 +71,7 @@ public class IzmenaKnjigeProzor extends JFrame {
         add(lblOpis);
         add(txtOpis);
         add(lblZanr);
-        add(txtZanr);
+        add(cbZanrovi);
         add(btnPromeni);
         add(btnCancel);
 
@@ -77,13 +82,18 @@ public class IzmenaKnjigeProzor extends JFrame {
         btnPromeni.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtIme.getText().equals("") || txtPrezime.getText().equals("") || txtNaslov.getText().equals("")
+                        || txtGodina.getText().equals("") || txtOpis.getText().equals("") || txtJezik.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 knjiga.setNaslovKnjige(txtNaslov.getText());
                 knjiga.setImePisca(txtIme.getText());
                 knjiga.setPrezimePisca(txtPrezime.getText());
                 knjiga.setGodinaObjave(txtGodina.getText());
                 knjiga.setOpis(txtOpis.getText());
                 knjiga.setJezik(Jezik.valueOf(txtJezik.getText()));
-                knjiga.setZanr(knjigeProzor.getBiblioteka().nadjiZanr(txtZanr.getText()));
+                knjiga.setZanr((Zanr) cbZanrovi.getSelectedItem());
                 IzmenaKnjigeProzor.this.dispose();
                 IzmenaKnjigeProzor.this.setVisible(false);
                 knjigeProzor.updateTable();

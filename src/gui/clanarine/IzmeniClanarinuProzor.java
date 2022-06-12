@@ -52,6 +52,10 @@ public class IzmeniClanarinuProzor extends JFrame {
         btnPromeni.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (txtNaziv.getText().equals("") || txtCena.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 clanarina.setNaziv(txtNaziv.getText());
                 clanarina.setCena(Double.parseDouble(txtCena.getText()));
                 clanarineProzor.updateTable();

@@ -326,6 +326,22 @@ public class Biblioteka {
 		}
 	}
 
+	public void snimiZanrove(String filename) {
+		File file = new File("src/fajlovi/" + filename);
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			String sadrzaj = "";
+			for (Zanr zanr: zanrovi) {
+				sadrzaj += zanr.getID() + "|" + zanr.getOznaka() + "|"
+						+ zanr.getOpis() + "\n";
+			}
+			writer.write(sadrzaj);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	public Zanr nadjiZanr(String oznaka) {
 		for (Zanr zanr: zanrovi) {
