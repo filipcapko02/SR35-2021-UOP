@@ -1,17 +1,18 @@
 package biblioteka_paket;
 
 public class Zanr {
-	
-	protected String oznaka;
-	protected String opis;
+
+	private int ID;
+	private String oznaka;
+	private String opis;
 	
 	public Zanr() {
 		this.oznaka = "";
 		this.opis = "";
 	}
 
-	public Zanr(String oznaka, String opis) {
-		super();
+	public Zanr(int ID, String oznaka, String opis) {
+		this.ID = ID;
 		this.oznaka = oznaka;
 		this.opis = opis;
 	}
@@ -42,7 +43,12 @@ public class Zanr {
 	public void setOpis(String opis) {
 		this.opis = opis;
 	}
-		
-	
 
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int ID) {
+		this.ID = ID;
+	}
 }

@@ -1,12 +1,11 @@
 package biblioteka_paket;
 
 import biblioteka_paket.enums.Pol;
-import biblioteka_paket.enums.TipClanarine;
 
 public class Clan extends Osoba {
 
 	private int brojClanskeKarte;
-	private TipClanarine tipClanarine;
+	private Clanarina clanarina;
 	private String datumPoslednjeUplate;
 	private int brojMeseci;
 	private boolean aktivan;
@@ -19,10 +18,10 @@ public class Clan extends Osoba {
 		this.adresa = "";
 	}
 
-	public Clan(int ID, Pol pol, String ime, String prezime, String jmbg, String adresa, int brojClanskeKarte, TipClanarine tipClanarine, String datumPoslednjeUplate, int brojMeseci, boolean aktivan) {
+	public Clan(int ID, Pol pol, String ime, String prezime, String jmbg, String adresa, int brojClanskeKarte, Clanarina clanarina, String datumPoslednjeUplate, int brojMeseci, boolean aktivan) {
 		super(ID, pol, ime, prezime, jmbg, adresa);
 		this.brojClanskeKarte = brojClanskeKarte;
-		this.tipClanarine = tipClanarine;
+		this.clanarina = clanarina;
 		this.datumPoslednjeUplate = datumPoslednjeUplate;
 		this.brojMeseci = brojMeseci;
 		this.aktivan = aktivan;
@@ -97,12 +96,12 @@ public class Clan extends Osoba {
 		this.brojClanskeKarte = brojClanskeKarte;
 	}
 
-	public TipClanarine getTipClanarine() {
-		return tipClanarine;
+	public Clanarina getClanarina() {
+		return clanarina;
 	}
 
-	public void setTipClanarine(TipClanarine tipClanarine) {
-		this.tipClanarine = tipClanarine;
+	public void setClanarina(Clanarina clanarina) {
+		this.clanarina = clanarina;
 	}
 
 	public String getDatumPoslednjeUplate() {
@@ -142,18 +141,6 @@ public class Clan extends Osoba {
 
 	@Override
 	public String toString() {
-		return "Clan{" +
-				", ID=" + ID +
-				", pol=" + pol +
-				", ime='" + ime + '\'' +
-				", prezime='" + prezime + '\'' +
-				", jmbg='" + jmbg + '\'' +
-				", adresa='" + adresa + '\'' +
-				"brojClanskeKarte=" + brojClanskeKarte +
-				", tipClanarine=" + tipClanarine +
-				", datumPoslednjeUplate='" + datumPoslednjeUplate + '\'' +
-				", brojMeseci=" + brojMeseci +
-				", aktivan=" + aktivan +
-				'}';
+		return ime + " " + prezime;
 	}
 }

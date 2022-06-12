@@ -1,7 +1,6 @@
 package gui.clanovi;
 
 import biblioteka_paket.Clan;
-import biblioteka_paket.enums.TipClanarine;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -50,7 +49,7 @@ public class IzmeniClanaProzor extends JFrame {
         txtAdresa = new JTextField(clan.getAdresa(), 20);
         txtJmbg = new JTextField(clan.getJmbg(), 20);
         txtBrojClanskeKarte = new JTextField(String.valueOf(clan.getBrojClanskeKarte()), 20);
-        txtTipClanarine = new JTextField(clan.getTipClanarine().toString(), 20);
+        txtTipClanarine = new JTextField(clan.getClanarina().getNaziv(), 20);
         txtDatumPoslednjeUplate = new JTextField(clan.getDatumPoslednjeUplate(), 20);
         txtBrojMeseci = new JTextField(String.valueOf(clan.getBrojMeseci()), 20);
 
@@ -91,7 +90,7 @@ public class IzmeniClanaProzor extends JFrame {
                 clan.setBrojMeseci(Integer.parseInt(txtBrojMeseci.getText()));
                 clan.setDatumPoslednjeUplate(txtDatumPoslednjeUplate.getText());
                 clan.setJmbg(txtJmbg.getText());
-                clan.setTipClanarine(TipClanarine.valueOf(txtTipClanarine.getText()));
+                clan.setClanarina(clanoviProzor.getBiblioteka().nadjiClanarinu(txtTipClanarine.getText()));
                 clanoviProzor.updateTable();
                 IzmeniClanaProzor.this.dispose();
                 IzmeniClanaProzor.this.setVisible(false);

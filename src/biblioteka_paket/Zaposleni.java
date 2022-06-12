@@ -34,18 +34,7 @@ public class Zaposleni extends Osoba {
 
 	@Override
 	public String toString() {
-		return "Zaposleni{" +
-				"ID=" + ID +
-				", pol=" + pol +
-				", ime='" + ime + '\'' +
-				", prezime='" + prezime + '\'' +
-				", jmbg='" + jmbg + '\'' +
-				", adresa='" + adresa + '\'' +
-				", korisnickoIme='" + korisnickoIme + '\'' +
-				", korisnickaSifra='" + korisnickaSifra + '\'' +
-				", plata=" + plata +
-				", obrisan=" + obrisan +
-				'}';
+		return korisnickoIme;
 	}
 
 	public String getKorisnickoIme() {

@@ -1,7 +1,6 @@
 package gui.knjige;
 
 import biblioteka_paket.Knjiga;
-import biblioteka_paket.Zanr;
 import biblioteka_paket.enums.Jezik;
 import net.miginfocom.swing.MigLayout;
 
@@ -84,7 +83,7 @@ public class IzmenaKnjigeProzor extends JFrame {
                 knjiga.setGodinaObjave(txtGodina.getText());
                 knjiga.setOpis(txtOpis.getText());
                 knjiga.setJezik(Jezik.valueOf(txtJezik.getText()));
-                knjiga.setZanr(new Zanr("zanr", "opisZanra"));
+                knjiga.setZanr(knjigeProzor.getBiblioteka().nadjiZanr(txtZanr.getText()));
                 IzmenaKnjigeProzor.this.dispose();
                 IzmenaKnjigeProzor.this.setVisible(false);
                 knjigeProzor.updateTable();

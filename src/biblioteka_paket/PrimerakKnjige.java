@@ -7,7 +7,7 @@ public class PrimerakKnjige {
 	
 	private int ID;
 	private Knjiga knjiga;
-	private String brojStrana;
+	private int brojStrana;
 	private Povez povez;
 	private String godinaStampanja;
 	private Jezik jezik;
@@ -21,11 +21,11 @@ public class PrimerakKnjige {
 		ID = iD;
 	}
 
-	public String getBrojStrana() {
+	public int getBrojStrana() {
 		return brojStrana;
 	}
 
-	public void setBrojStrana(String brojStrana) {
+	public void setBrojStrana(int brojStrana) {
 		this.brojStrana = brojStrana;
 	}
 
@@ -61,18 +61,26 @@ public class PrimerakKnjige {
 		this.iznajmljena = iznajmljena;
 	}
 
+	public void setKnjiga(Knjiga knjiga) {
+		this.knjiga = knjiga;
+	}
+
+	public Knjiga getKnjiga() {
+		return knjiga;
+	}
+
 	public PrimerakKnjige() {
 		this.ID = 0;
-		this.brojStrana = "";
+		this.brojStrana = 0;
 		this.godinaStampanja = "";
 	}
 	
-	public PrimerakKnjige(int ID, String brojStrana ,
+	public PrimerakKnjige(int ID, Knjiga knjiga, int brojStrana ,
 						  Povez povez,
 						  String godinaStampanja, Jezik jezik,
 						  boolean iznajmljena) {
-		super();
 		this.ID = ID;
+		this.knjiga = knjiga;
 		this.brojStrana = brojStrana;
 		this.povez = povez;
 		this.godinaStampanja = godinaStampanja;
@@ -81,8 +89,7 @@ public class PrimerakKnjige {
 	}
 	@Override
 	public String toString() {
-		return "Primerak [ID=" + ID + ", brojStrana=" + brojStrana + ", povez=" + povez + ", godinaStampanja="
-				+ godinaStampanja + ", jezik=" + jezik + ", iznajmljena=" + iznajmljena + "]";
+		return knjiga.getNaslovKnjige() + "(" + jezik + ")";
 	}
 
 	public PrimerakKnjige(PrimerakKnjige original) {

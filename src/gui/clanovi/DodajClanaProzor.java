@@ -2,7 +2,6 @@ package gui.clanovi;
 
 import biblioteka_paket.Clan;
 import biblioteka_paket.enums.Pol;
-import biblioteka_paket.enums.TipClanarine;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -41,7 +40,6 @@ public class DodajClanaProzor extends JFrame {
         setTitle("Dodaj clana");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setSize(300, 300);
         initGUI();
         initActions();
         pack();
@@ -94,7 +92,7 @@ public class DodajClanaProzor extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Clan clan = new Clan(Integer.parseInt(txtId.getText()), Pol.valueOf(txtPol.getText()), txtIme.getText(), txtPrezime.getText(),
-                        txtJmbg.getText(), txtAdresa.getText(), Integer.parseInt(txtBrojClanskeKarte.getText()), TipClanarine.valueOf(txtTipClanarine.getText()),
+                        txtJmbg.getText(), txtAdresa.getText(), Integer.parseInt(txtBrojClanskeKarte.getText()), clanoviProzor.getBiblioteka().nadjiClanarinu(txtTipClanarine.getText()),
                         txtDatumPoslednjeUplate.getText(), Integer.parseInt(txtBrojMeseci.getText()), true);
                 clanoviProzor.getBiblioteka().dodajClana(clan);
                 clanoviProzor.updateTable();

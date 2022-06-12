@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 public class DodajKnjiguProzor extends JFrame {
 
+    private JLabel lblId = new JLabel("ID");
     private JLabel lblNaslov = new JLabel("Naslov knjige");
     private JLabel lblImePisca = new JLabel("Ime pisca");
     private JLabel lblPrezimePisca = new JLabel("Prezime pisca");
@@ -18,6 +19,7 @@ public class DodajKnjiguProzor extends JFrame {
     private JLabel lblJezik = new JLabel("Jezik");
     private JLabel lblOpis = new JLabel("Opis");
     private JLabel lblZanr = new JLabel("Zanr");
+    private JTextField txtId;
     private JTextField txtNaslov;
     private JTextField txtIme;
     private JTextField txtPrezime;
@@ -42,6 +44,7 @@ public class DodajKnjiguProzor extends JFrame {
     }
 
     private void initGUI() {
+        txtId = new JTextField("", 20);
         txtNaslov = new JTextField("", 20);
         txtIme = new JTextField("", 20);
         txtPrezime = new JTextField("", 20);
@@ -54,6 +57,8 @@ public class DodajKnjiguProzor extends JFrame {
         MigLayout mig = new MigLayout("wrap 2", "[]5[]", "[]10[][]10[]10[]10[]10[]");
         setLayout(mig);
 
+        add(lblId);
+        add(txtId);
         add(lblNaslov);
         add(txtNaslov);
         add(lblImePisca);
@@ -79,14 +84,14 @@ public class DodajKnjiguProzor extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Knjiga knjiga = new Knjiga();
+                knjiga.setID(Integer.parseInt(txtId.getText()));
                 knjiga.setNaslovKnjige(txtNaslov.getText());
                 knjiga.setImePisca(txtIme.getText());
                 knjiga.setPrezimePisca(txtPrezime.getText());
                 knjiga.setGodinaObjave(txtGodina.getText());
                 knjiga.setOpis(txtOpis.getText());
                 knjiga.setJezik(Jezik.valueOf(txtJezik.getText()));
-                knjiga.setZanr(new Zanr("zanr", "opisZanra"));
-                knjiga.setID(1512);
+                knjiga.setZanr(knjigeProzor.getBiblioteka().nadjiZanr(txtZanr.getText()));
                 knjigeProzor.getBiblioteka().dodajKnjigu(knjiga);
                 knjigeProzor.updateTable();
                 DodajKnjiguProzor.this.dispose();

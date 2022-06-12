@@ -54,7 +54,7 @@ public class ClanoviProzor extends JFrame {
             sadrzaj[i][2] = clan.getPrezime();
             sadrzaj[i][3] = clan.getJmbg();
             sadrzaj[i][4] = clan.getBrojClanskeKarte();
-            sadrzaj[i][5] = clan.getTipClanarine();
+            sadrzaj[i][5] = clan.getClanarina().getNaziv();
             sadrzaj[i][6] = clan.getDatumPoslednjeUplate();
         }
 
@@ -112,7 +112,7 @@ public class ClanoviProzor extends JFrame {
             sadrzaj[i][2] = clan.getPrezime();
             sadrzaj[i][3] = clan.getJmbg();
             sadrzaj[i][4] = clan.getBrojClanskeKarte();
-            sadrzaj[i][5] = clan.getTipClanarine();
+            sadrzaj[i][5] = clan.getClanarina().getNaziv();
             sadrzaj[i][6] = clan.getDatumPoslednjeUplate();
         }
         tableModel.setDataVector(sadrzaj, zaglavlja);
