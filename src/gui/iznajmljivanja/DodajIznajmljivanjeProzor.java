@@ -93,6 +93,12 @@ public class DodajIznajmljivanjeProzor extends JFrame {
                 iznajmljivanje.setDatumIznajmljivanja(txtDatumIznajmljivanja.getText());
                 iznajmljivanje.setDatumVracanja(txtDatumVracanja.getText());
                 iznajmljivanje.setPrimerakKnjige((PrimerakKnjige) cbPrimerci.getSelectedItem());
+                boolean result = iznajmljivanjaProzor.getBiblioteka().dodajIznajmljivanje(iznajmljivanje);
+                if (!result) {
+                    JOptionPane.showMessageDialog(null, "Najam sa tim id-jem vec postoji."
+                            , "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 DodajIznajmljivanjeProzor.this.dispose();
                 DodajIznajmljivanjeProzor.this.setVisible(false);
                 iznajmljivanjaProzor.updateTable();

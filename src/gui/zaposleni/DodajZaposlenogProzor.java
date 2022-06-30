@@ -116,7 +116,12 @@ public class DodajZaposlenogProzor extends JFrame {
                 zaposleni.setKorisnickaSifra(txtKorisnickaSifra.getText());
                 zaposleni.setKorisnickoIme(txtKorisnickoIme.getText());
                 zaposleni.setPlata(Integer.parseInt(txtPlata.getText()));
-                zaposleniProzor.getBiblioteka().dodajZaposlenog(zaposleni);
+                boolean result = zaposleniProzor.getBiblioteka().dodajZaposlenog(zaposleni);
+                if (!result) {
+                    JOptionPane.showMessageDialog(null, "Zaposleni sa tim id-jem vec postoji."
+                            , "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 zaposleniProzor.updateTable();
                 DodajZaposlenogProzor.this.dispose();
                 DodajZaposlenogProzor.this.setVisible(false);

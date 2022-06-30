@@ -68,7 +68,12 @@ public class DodajClanarinuProzor extends JFrame {
                 clanarina.setID(Integer.parseInt(txtId.getText()));
                 clanarina.setNaziv(txtNaziv.getText());
                 clanarina.setCena(Double.parseDouble(txtCena.getText()));
-                clanarineProzor.getBiblioteka().getClanarine().add(clanarina);
+                boolean result = clanarineProzor.getBiblioteka().dodajClanarinu(clanarina);
+                if (!result) {
+                    JOptionPane.showMessageDialog(null, "Clanarina sa tim id-jem vec postoji."
+                            , "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 clanarineProzor.updateTable();
                 DodajClanarinuProzor.this.dispose();
                 DodajClanarinuProzor.this.setVisible(false);

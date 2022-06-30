@@ -105,7 +105,12 @@ public class DodajPrimerakProzor extends JFrame {
                 primerakKnjige.setPovez((Povez) cbPovezi.getSelectedItem());
                 boolean iznajmljena = cbIznajmljena.getSelectedItem().equals("DA");
                 primerakKnjige.setIznajmljena(iznajmljena);
-                primerciProzor.getBiblioteka().dodajPrimerakKnjige(primerakKnjige);
+                boolean result = primerciProzor.getBiblioteka().dodajPrimerakKnjige(primerakKnjige);
+                if (!result) {
+                    JOptionPane.showMessageDialog(null, "Primerak sa tim id-jem vec postoji."
+                            , "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 DodajPrimerakProzor.this.dispose();
                 DodajPrimerakProzor.this.setVisible(false);
                 primerciProzor.updateTable();

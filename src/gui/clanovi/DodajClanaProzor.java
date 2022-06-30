@@ -105,7 +105,12 @@ public class DodajClanaProzor extends JFrame {
                 Clan clan = new Clan(Integer.parseInt(txtId.getText()), Pol.valueOf(txtPol.getText()), txtIme.getText(), txtPrezime.getText(),
                         txtJmbg.getText(), txtAdresa.getText(), Integer.parseInt(txtBrojClanskeKarte.getText()), (Clanarina) cbClanarine.getSelectedItem(),
                         txtDatumPoslednjeUplate.getText(), Integer.parseInt(txtBrojMeseci.getText()), true);
-                clanoviProzor.getBiblioteka().dodajClana(clan);
+                boolean result = clanoviProzor.getBiblioteka().dodajClana(clan);
+                if (!result) {
+                    JOptionPane.showMessageDialog(null, "Clan sa tim id-jem vec postoji."
+                            , "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 clanoviProzor.updateTable();
                 DodajClanaProzor.this.dispose();
                 DodajClanaProzor.this.setVisible(false);

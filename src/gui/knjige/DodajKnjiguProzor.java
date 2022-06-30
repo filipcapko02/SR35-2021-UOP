@@ -102,7 +102,12 @@ public class DodajKnjiguProzor extends JFrame {
                 knjiga.setOpis(txtOpis.getText());
                 knjiga.setJezik(Jezik.valueOf(txtJezik.getText()));
                 knjiga.setZanr((Zanr) cbZanrovi.getSelectedItem());
-                knjigeProzor.getBiblioteka().dodajKnjigu(knjiga);
+                boolean result = knjigeProzor.getBiblioteka().dodajKnjigu(knjiga);
+                if (!result) {
+                    JOptionPane.showMessageDialog(null, "Zaposleni sa tim id-jem vec postoji."
+                            , "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 knjigeProzor.updateTable();
                 DodajKnjiguProzor.this.dispose();
                 DodajKnjiguProzor.this.setVisible(false);

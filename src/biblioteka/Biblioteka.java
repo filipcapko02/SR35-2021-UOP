@@ -365,9 +365,16 @@ public class Biblioteka {
 		return null;
 	}
 
+	public boolean dodajClanarinu(Clanarina clanarina) {
+		if (!clanarine.contains(clanarina)) {
+			clanarine.add(clanarina);
+			return true;
+		}
+		return false;
+	}
+
 
 	public boolean dodajZaposlenog(Zaposleni zaposlen) {
-		System.out.println(zaposlen);
 		if (!this.zaposleni.contains(zaposlen)) {
 			this.zaposleni.add(zaposlen);
 			return true;

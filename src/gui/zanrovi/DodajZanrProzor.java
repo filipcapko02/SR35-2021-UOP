@@ -63,7 +63,12 @@ public class DodajZanrProzor extends JFrame {
                 zanr.setID(Integer.parseInt(txtId.getText()));
                 zanr.setOznaka(txtOznaka.getText());
                 zanr.setOpis(txtOpis.getText());
-                zanroviProzor.getBiblioteka().dodajZanr(zanr);
+                boolean result = zanroviProzor.getBiblioteka().dodajZanr(zanr);
+                if (!result) {
+                    JOptionPane.showMessageDialog(null, "Zanr sa tim id-jem vec postoji."
+                            , "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 zanroviProzor.updateTable();
                 DodajZanrProzor.this.dispose();
                 DodajZanrProzor.this.setVisible(false);
