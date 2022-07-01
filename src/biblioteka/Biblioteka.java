@@ -21,6 +21,7 @@ public class Biblioteka {
 	private ArrayList<Clanarina> clanarine;
 	private ArrayList<PrimerakKnjige> primerciKnjiga;
 	private ArrayList<Iznajmljivanje> iznajmljivanja;
+	private ArrayList<Integer> iznajmljivanjaIds;
 
 	public Biblioteka() {
 		this.clanovi = new ArrayList<Clan>();
@@ -30,6 +31,17 @@ public class Biblioteka {
 		this.clanarine = new ArrayList<>();
 		this.primerciKnjiga = new ArrayList<>();
 		this.iznajmljivanja = new ArrayList<>();
+		this.iznajmljivanjaIds = new ArrayList<>();
+	}
+
+	public int nadjiSlobodanId() {
+		for (int i = 1; i < Integer.MAX_VALUE; i++) {
+			if (!iznajmljivanjaIds.contains(i)) {
+				iznajmljivanjaIds.add(i);
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	public void ucitajClanarine(String filename) {
@@ -212,6 +224,7 @@ public class Biblioteka {
 
 				Iznajmljivanje iznajmljivanje = new Iznajmljivanje(id, zaposleni, clan, datumIznajmljivanja, datumVracanja, primerakKnjige);
 				this.iznajmljivanja.add(iznajmljivanje);
+				this.iznajmljivanjaIds.add(id);
 			}
 
 			reader.close();
