@@ -104,7 +104,7 @@ public class DodajIznajmljivanjeProzor extends JFrame {
                 iznajmljivanje.setPrimerci((ArrayList<PrimerakKnjige>) listPrimerci.getSelectedValuesList());
                 boolean result = iznajmljivanjaProzor.getBiblioteka().dodajIznajmljivanje(iznajmljivanje);
                 if (!result) {
-                    JOptionPane.showMessageDialog(null, "Clan sa tim id-jem vec postoji."
+                    JOptionPane.showMessageDialog(null, "Najam sa tim id-jem vec postoji."
                             , "Greska", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
