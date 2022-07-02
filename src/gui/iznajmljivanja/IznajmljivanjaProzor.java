@@ -45,7 +45,7 @@ public class IznajmljivanjaProzor extends JFrame {
         mainToolbar.add(btnDelete);
         add(mainToolbar, BorderLayout.NORTH);
 
-        zaglavlja = new String[] {"ID", "Zaposleni(izdao)", "Clan", "Datum iznajmljivanja", "Datum vracanja", "Primerak knjige"};
+        zaglavlja = new String[] {"ID", "Zaposleni(izdao)", "Clan", "Datum iznajmljivanja", "Datum vracanja", "Primerci knjiga"};
         Object[][] sadrzaj = new Object[biblioteka.getIznajmljivanja().size()][zaglavlja.length];
 
         for (int i = 0; i < biblioteka.getIznajmljivanja().size(); i++) {
@@ -55,7 +55,7 @@ public class IznajmljivanjaProzor extends JFrame {
             sadrzaj[i][2] = iznajmljivanje.getClan();
             sadrzaj[i][3] = iznajmljivanje.getDatumIznajmljivanja();
             sadrzaj[i][4] = iznajmljivanje.getDatumVracanja();
-            sadrzaj[i][5] = iznajmljivanje.getPrimerakKnjige().getKnjiga().getNaslovKnjige();
+            sadrzaj[i][5] = iznajmljivanje.getPrimerci();
         }
 
         tableModel = new DefaultTableModel(sadrzaj, zaglavlja);
@@ -112,7 +112,7 @@ public class IznajmljivanjaProzor extends JFrame {
             sadrzaj[i][2] = iznajmljivanje.getClan();
             sadrzaj[i][3] = iznajmljivanje.getDatumIznajmljivanja();
             sadrzaj[i][4] = iznajmljivanje.getDatumVracanja();
-            sadrzaj[i][5] = iznajmljivanje.getPrimerakKnjige().getKnjiga().getNaslovKnjige();
+            sadrzaj[i][5] = iznajmljivanje.getPrimerci();
         }
         tableModel.setDataVector(sadrzaj, zaglavlja);
     }

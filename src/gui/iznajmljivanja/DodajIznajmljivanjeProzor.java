@@ -9,20 +9,22 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DodajIznajmljivanjeProzor extends JFrame {
 
+    private JLabel lblId = new JLabel("ID");
     private JLabel lblZaposleni = new JLabel("Zaposleni");
     private JLabel lblClan = new JLabel("Clan");
     private JLabel lblDatumIznajmljivanja = new JLabel("Datum iznajmljivanja");
     private JLabel lblDatumVracanja = new JLabel("Datum vracanja");
     private JLabel lblPrimerakKnjige = new JLabel("Primerak");
+    private JTextField txtId;
     private JTextField txtDatumIznajmljivanja;
     private JTextField txtDatumVracanja;
     private JComboBox<Zaposleni> cbZaposleni;
     private JComboBox<Clan> cbClanovi;
-    private JComboBox<PrimerakKnjige> cbPrimerci;
     private JList<PrimerakKnjige> listPrimerci;
     private JButton btnDodaj = new JButton("Dodaj");
     private JButton btnCancel = new JButton("Cancel");
@@ -40,6 +42,7 @@ public class DodajIznajmljivanjeProzor extends JFrame {
     }
 
     private void initGUI() {
+        txtId = new JTextField("", 20);
         txtDatumIznajmljivanja = new JTextField("", 20);
         txtDatumVracanja = new JTextField("", 20);
         Zaposleni[] zaposleni = new Zaposleni[iznajmljivanjaProzor.getBiblioteka().getZaposleni().size()];
@@ -56,7 +59,6 @@ public class DodajIznajmljivanjeProzor extends JFrame {
         for (int i = 0; i < iznajmljivanjaProzor.getBiblioteka().getPrimerciKnjiga().size(); i++) {
             primerci[i] = iznajmljivanjaProzor.getBiblioteka().getPrimerciKnjiga().get(i);
         }
-        //cbPrimerci = new JComboBox<>(primerci);
 
         // Lista svih primeraka
         listPrimerci = new JList<>(primerci);
@@ -66,6 +68,8 @@ public class DodajIznajmljivanjeProzor extends JFrame {
         MigLayout mig = new MigLayout("wrap 2", "[]5[]", "[]10[][]10[]10[]10[]10[]");
         setLayout(mig);
 
+        add(lblId);
+        add(txtId);
         add(lblZaposleni);
         add(cbZaposleni);
         add(lblClan);
@@ -91,16 +95,18 @@ public class DodajIznajmljivanjeProzor extends JFrame {
                     return;
                 }
 
-                List<PrimerakKnjige> selected = listPrimerci.getSelectedValuesList();
-                for (int i = 0; i < selected.size(); i++) {
-                    Iznajmljivanje iznajmljivanje = new Iznajmljivanje();
-                    iznajmljivanje.setID(iznajmljivanjaProzor.getBiblioteka().nadjiSlobodanId());
-                    iznajmljivanje.setZaposleni((Zaposleni) cbZaposleni.getSelectedItem());
-                    iznajmljivanje.setClan((Clan) cbClanovi.getSelectedItem());
-                    iznajmljivanje.setDatumIznajmljivanja(txtDatumIznajmljivanja.getText());
-                    iznajmljivanje.setDatumVracanja(txtDatumVracanja.getText());
-                    iznajmljivanje.setPrimerakKnjige(selected.get(i));
-                    iznajmljivanjaProzor.getBiblioteka().dodajIznajmljivanje(iznajmljivanje);
+                Iznajmljivanje iznajmljivanje = new Iznajmljivanje();
+                iznajmljivanje.setID(Integer.parseInt(txtId.getText()));
+                iznajmljivanje.setZaposleni((Zaposleni) cbZaposleni.getSelectedItem());
+                iznajmljivanje.setClan((Clan) cbClanovi.getSelectedItem());
+                iznajmljivanje.setDatumIznajmljivanja(txtDatumIznajmljivanja.getText());
+                iznajmljivanje.setDatumVracanja(txtDatumVracanja.getText());
+                iznajmljivanje.setPrimerci((ArrayList<PrimerakKnjige>) listPrimerci.getSelectedValuesList());
+                boolean result = iznajmljivanjaProzor.getBiblioteka().dodajIznajmljivanje(iznajmljivanje);
+                if (!result) {
+                    JOptionPane.showMessageDialog(null, "Clan sa tim id-jem vec postoji."
+                            , "Greska", JOptionPane.WARNING_MESSAGE);
+                    return;
                 }
                 DodajIznajmljivanjeProzor.this.dispose();
                 DodajIznajmljivanjeProzor.this.setVisible(false);

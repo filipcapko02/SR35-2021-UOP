@@ -1,5 +1,7 @@
 package biblioteka_paket;
 
+import java.util.ArrayList;
+
 public class Iznajmljivanje {
 
     private int ID;
@@ -7,19 +9,20 @@ public class Iznajmljivanje {
     private Clan clan;
     private String datumIznajmljivanja;
     private String datumVracanja;
-    private PrimerakKnjige primerakKnjige;
+    private ArrayList<PrimerakKnjige> primerci;
+
 
     public Iznajmljivanje() {
 
     }
 
-    public Iznajmljivanje(int ID, Zaposleni zaposleni, Clan clan, String datumIznajmljivanja, String datumVracanja, PrimerakKnjige primerakKnjige) {
+    public Iznajmljivanje(int ID, Zaposleni zaposleni, Clan clan, String datumIznajmljivanja, String datumVracanja, ArrayList<PrimerakKnjige> primerci) {
         this.ID = ID;
         this.zaposleni = zaposleni;
         this.clan = clan;
         this.datumIznajmljivanja = datumIznajmljivanja;
         this.datumVracanja = datumVracanja;
-        this.primerakKnjige = primerakKnjige;
+        this.primerci = primerci;
     }
 
     @Override
@@ -30,7 +33,7 @@ public class Iznajmljivanje {
                 ", clan=" + clan +
                 ", datumIznajmljivanja='" + datumIznajmljivanja + '\'' +
                 ", datumVracanja='" + datumVracanja + '\'' +
-                ", primerakKnjige=" + primerakKnjige +
+                ", primerci=" + primerci +
                 '}';
     }
 
@@ -74,11 +77,11 @@ public class Iznajmljivanje {
         this.datumVracanja = datumVracanja;
     }
 
-    public PrimerakKnjige getPrimerakKnjige() {
-        return primerakKnjige;
+    public ArrayList<PrimerakKnjige> getPrimerci() {
+        return primerci;
     }
 
-    public void setPrimerakKnjige(PrimerakKnjige primerakKnjige) {
-        this.primerakKnjige = primerakKnjige;
+    public void setPrimerci(ArrayList<PrimerakKnjige> primerci) {
+        this.primerci = primerci;
     }
 }

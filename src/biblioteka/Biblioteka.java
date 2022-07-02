@@ -21,7 +21,6 @@ public class Biblioteka {
 	private ArrayList<Clanarina> clanarine;
 	private ArrayList<PrimerakKnjige> primerciKnjiga;
 	private ArrayList<Iznajmljivanje> iznajmljivanja;
-	private ArrayList<Integer> iznajmljivanjaIds;
 
 	public Biblioteka() {
 		this.clanovi = new ArrayList<Clan>();
@@ -31,17 +30,6 @@ public class Biblioteka {
 		this.clanarine = new ArrayList<>();
 		this.primerciKnjiga = new ArrayList<>();
 		this.iznajmljivanja = new ArrayList<>();
-		this.iznajmljivanjaIds = new ArrayList<>();
-	}
-
-	public int nadjiSlobodanId() {
-		for (int i = 1; i < Integer.MAX_VALUE; i++) {
-			if (!iznajmljivanjaIds.contains(i)) {
-				iznajmljivanjaIds.add(i);
-				return i;
-			}
-		}
-		return -1;
 	}
 
 	public void ucitajClanarine(String filename) {
@@ -220,11 +208,14 @@ public class Biblioteka {
 				Clan clan = nadjiClana(Integer.parseInt(split[2]));
 				String datumIznajmljivanja = split[3];
 				String datumVracanja = split[4];
-				PrimerakKnjige primerakKnjige = nadjiPrimerakKnjige(Integer.parseInt(split[5]));
+				ArrayList<PrimerakKnjige> primerciKnjiga = new ArrayList<>();
+				String[] primerci = split[5].contains(",") ? split[5].split(",") : new String[]{split[5]};
+				for (String s : primerci) {
+					primerciKnjiga.add(nadjiPrimerakKnjige(Integer.parseInt(s)));
+				}
 
-				Iznajmljivanje iznajmljivanje = new Iznajmljivanje(id, zaposleni, clan, datumIznajmljivanja, datumVracanja, primerakKnjige);
+				Iznajmljivanje iznajmljivanje = new Iznajmljivanje(id, zaposleni, clan, datumIznajmljivanja, datumVracanja, primerciKnjiga);
 				this.iznajmljivanja.add(iznajmljivanje);
-				this.iznajmljivanjaIds.add(id);
 			}
 
 			reader.close();
@@ -329,8 +320,12 @@ public class Biblioteka {
 			for (Iznajmljivanje iznajmljivanje: iznajmljivanja) {
 				sadrzaj += iznajmljivanje.getID() + "|" + iznajmljivanje.getZaposleni().getKorisnickoIme() + "|"
 						+ iznajmljivanje.getClan().getID() + "|" + iznajmljivanje.getDatumIznajmljivanja() + "|"
-						+ iznajmljivanje.getDatumVracanja() + "|"
-						+ iznajmljivanje.getPrimerakKnjige().getID() + "\n";
+						+ iznajmljivanje.getDatumVracanja() + "|";
+				for (PrimerakKnjige pk: iznajmljivanje.getPrimerci()) {
+					sadrzaj += pk.getID() + ",";
+				}
+				sadrzaj = sadrzaj.substring(0, sadrzaj.length() - 1);
+				sadrzaj += "\n";
 			}
 			writer.write(sadrzaj);
 			writer.close();
